@@ -1,5 +1,5 @@
 /* ARQUIVO: main.c
-   TAREFA: Montador NASM (Opção 2) - Integração C e NASM
+   TAREFA: Montador NASM - Integração C e NASM
    OBJETIVO: Chamar uma função Assembly que usa stdio.h
 */
 
