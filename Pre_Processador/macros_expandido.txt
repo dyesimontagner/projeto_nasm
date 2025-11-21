@@ -1,0 +1,35 @@
+%line 36+1 Pre_Processador/macros_demo.asm
+[section .text]
+[global main]
+
+main:
+
+
+%line 11+1 Pre_Processador/macros_demo.asm
+ push ebp
+ mov ebp, esp
+ push ebx
+ push esi
+ push edi
+%line 43+1 Pre_Processador/macros_demo.asm
+
+
+ mov eax, 10
+
+
+%line 32+1 Pre_Processador/macros_demo.asm
+ shl eax, 1
+%line 49+1 Pre_Processador/macros_demo.asm
+
+
+
+%line 21+1 Pre_Processador/macros_demo.asm
+ pop edi
+ pop esi
+ pop ebx
+ mov esp, ebp
+ pop ebp
+ ret
+%line 53+1 Pre_Processador/macros_demo.asm
+
+
