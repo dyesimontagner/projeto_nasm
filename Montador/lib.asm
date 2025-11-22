@@ -1,31 +1,61 @@
 ; =================================================================
 ; ARQUIVO: lib.asm
-; OBJETIVO: Definir a função que o C vai chamar e usar o printf.
+; OBJETIVO: Implementar funções Assembly chamadas pelo C:
+;   - int somar(int a, int b)
+;   - void asm_chamando_printf(int resultado)
 ; =================================================================
 
-extern printf          
+extern printf
+
+global somar
 global asm_chamando_printf
 
 section .data
-    ; Mensagem para o printf
-    msg db "    [ASM]: Ola! Eu sou o Assembly executando um printf!", 10, 0
+    msg_fmt db "    [ASM]: O resultado da soma é: %d", 10, 0
 
 section .text
 
-asm_chamando_printf:
-    ; --- Prologo ---
+; =================================================================
+; int somar(int a, int b)
+; CDECL:
+;   a = [ebp + 8]
+;   b = [ebp + 12]
+; Retorno em EAX
+; =================================================================
+somar:
     push ebp
-    mov ebp, esp
+    mov  ebp, esp
 
-    ; --- Corpo ---
-    push msg        ; Empilha o endereço da mensagem
-    call printf     ; Chama o C
-    add esp, 4      ; Limpa a pilha
+    mov eax, [ebp + 8]     ; eax = a
+    mov edx, [ebp + 12]    ; edx = b (uso edx para não clobber ebx)
+    add eax, edx           ; eax = a + b  (valor de retorno)
 
-    ; --- Epilogo ---
     mov esp, ebp
     pop ebp
     ret
 
-; Essa linha abaixo avisa o Linux que não precisamos de pilha executável
-section .note.GNU-stack noalloc noexec nowrite progbits
+
+; =================================================================
+; void asm_chamando_printf(int resultado)
+; CDECL:
+;   resultado = [ebp + 8]
+; Esta função chama printf("%d")
+; =================================================================
+asm_chamando_printf:
+    push ebp
+    mov  ebp, esp
+
+    mov eax, [ebp + 8]     ; pega o inteiro enviado pelo C
+
+    push eax               ; segundo argumento: o valor
+    push msg_fmt           ; primeiro argumento: string de formato
+    call printf
+    add esp, 8             ; limpa a pilha
+
+    mov esp, ebp
+    pop ebp
+    ret
+
+
+; NÃO NECESSITA DE PILHA EXECUTÁVEL
+section .note.GNU-stack noalloc noexec nowrite progbits 
