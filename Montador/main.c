@@ -17,9 +17,9 @@ int main() {
     printf("[C] Somando %d + %d usando Assembly...\n", x, y);
     int resultado = somar(x, y);
 
-    printf("[C] Chamando asm_chamando_printf(resultado)...\n");
+    printf("[C] Chamando asm_chamando_printf \n");
     asm_chamando_printf(resultado);
 
-    printf("[C] Terminei.\n");
+    printf("[C] Fim.\n");
     return 0;
 }
