@@ -7,17 +7,19 @@
 
 // 'extern': Avisa o C que essa função existe em outro arquivo (no .asm)
 // 'void': Ela não retorna valor.
-extern void asm_chamando_printf();
+extern int somar(int a, int b);
+extern void asm_chamando_printf(int resultado);
 
 int main() {
-    printf("[C]: Inicio do programa em C.\n");
-    printf("[C]: Vou chamar a funcao escrita em Assembly agora...\n");
-    printf("---------------------------------------------------\n");
+    int x = 100;
+    int y = 5;
 
-    // Chamada da função Assembly
-    asm_chamando_printf();
+    printf("[C] Somando %d + %d usando Assembly...\n", x, y);
+    int resultado = somar(x, y);
 
-    printf("---------------------------------------------------\n");
-    printf("[C]: A funcao Assembly retornou. Fim do programa.\n");
+    printf("[C] Chamando asm_chamando_printf(resultado)...\n");
+    asm_chamando_printf(resultado);
+
+    printf("[C] Terminei.\n");
     return 0;
 }
