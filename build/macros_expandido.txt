@@ -1,35 +1,98 @@
-%line 36+1 Pre_Processador/macros_demo.asm
+%line 94+1 Pre_Processador/macros_demo.asm
+[section .data]
+
+%line 40+1 Pre_Processador/macros_demo.asm
+ letraA: db 'A'
+%line 40+0 Pre_Processador/macros_demo.asm
+ letraZ: db 'Z'
+%line 98+0 Pre_Processador/macros_demo.asm
+
+%line 99+1 Pre_Processador/macros_demo.asm
+keytab:
+%line 81+1 Pre_Processador/macros_demo.asm
+ keyposF1 equ $ - keytab
+ db 129
+%line 81+1 Pre_Processador/macros_demo.asm
+ keyposF2 equ $ - keytab
+ db 130
+%line 81+1 Pre_Processador/macros_demo.asm
+ keyposReturn equ $ - keytab
+ db 13
+%line 103+1 Pre_Processador/macros_demo.asm
+
+filehandle dw 1
+
+
+
+
 [section .text]
 [global main]
 
 main:
-
-
-%line 11+1 Pre_Processador/macros_demo.asm
+%line 23+1 Pre_Processador/macros_demo.asm
  push ebp
  mov ebp, esp
  push ebx
  push esi
  push edi
-%line 43+1 Pre_Processador/macros_demo.asm
+%line 114+1 Pre_Processador/macros_demo.asm
 
+ mov eax, 20
 
- mov eax, 10
+ call func_exemplo_frame
 
+ mov ebx, 1
+ mov ecx, 2
+ mov edx, 3
+%line 68+1 Pre_Processador/macros_demo.asm
+ push eax
+%line 68+0 Pre_Processador/macros_demo.asm
+ push ebx
+ push ecx
+ push edx
+%line 76+0 Pre_Processador/macros_demo.asm
+ pop edx
+ pop ecx
+ pop ebx
+ pop eax
+%line 124+0 Pre_Processador/macros_demo.asm
 
-%line 32+1 Pre_Processador/macros_demo.asm
- shl eax, 1
-%line 49+1 Pre_Processador/macros_demo.asm
+%line 125+1 Pre_Processador/macros_demo.asm
+ cmp eax, 20
+ je .ok
+%line 44+1 Pre_Processador/macros_demo.asm
+ jnz ..@11.skip
+ ret
+..@11.skip:
+%line 128+1 Pre_Processador/macros_demo.asm
+.ok:
 
+ mov eax, 0
+ cmp eax, 0
+%line 86+1 Pre_Processador/macros_demo.asm
+ jnz ..@12.skip
+ ret
+..@12.skip:
+%line 133+1 Pre_Processador/macros_demo.asm
 
-
-%line 21+1 Pre_Processador/macros_demo.asm
+%line 31+1 Pre_Processador/macros_demo.asm
  pop edi
  pop esi
  pop ebx
  mov esp, ebp
  pop ebp
  ret
-%line 53+1 Pre_Processador/macros_demo.asm
+%line 135+1 Pre_Processador/macros_demo.asm
 
 
+func_exemplo_frame:
+%line 11+1 Pre_Processador/macros_demo.asm
+ push ebp
+ mov ebp, esp
+ sub esp, 16
+%line 139+1 Pre_Processador/macros_demo.asm
+ mov dword [ebp-4], 1234
+%line 17+1 Pre_Processador/macros_demo.asm
+ mov esp, ebp
+ pop ebp
+ ret
