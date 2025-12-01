@@ -1,1 +1,7 @@
-ola mundo teste de assembly com syscalls
+Ola Mundo! Este e um teste de FILTRO em Assembly.
+1234567890 - Numeros nao devem mudar.
+!@#$%&*() - Simbolos tambem nao.
+linha com letras minusculas para converter.
+LINHA JA MAIUSCULA (DEVE FICAR IGUAL).
+     espacos no inicio e tabulacoes	.
+fim do arquivo.
