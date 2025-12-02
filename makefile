@@ -75,7 +75,7 @@ deps:
 # Linkagem usando GCC + Garantia de permissão
 $(EXEC_INTEGRA): $(BUILD_DIR)/main.o $(BUILD_DIR)/lib.o
 	$(CC) $(LDFLAGS) $^ -o $@
-	@chmod +x $@
+
 
 # Compilação do C (Garante que 'dirs' existe antes de compilar)
 $(BUILD_DIR)/main.o: $(SRC_MONT)/main.c | dirs
@@ -93,7 +93,7 @@ $(BUILD_DIR)/lib.o: $(SRC_MONT)/lib.asm | dirs
 # Linkagem usando LD + Garantia de permissão
 $(EXEC_FILTRO): $(BUILD_DIR)/filtro.o
 	$(LD) $(LD_RAW_FLAGS) $< -o $@
-	@chmod +x $@
+
 
 # Montagem do Assembly do filtro
 $(BUILD_DIR)/filtro.o: $(SRC_MONT)/filtro.asm | dirs
