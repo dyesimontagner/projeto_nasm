@@ -3,6 +3,32 @@
 Este documento orienta a execução do projeto, descrevendo as tarefas escolhidas, como rodar o código usando o `Makefile` e os conceitos teóricos necessários para a apresentação.
 
 ---
+## 0. Dependências obrigatórias
+
+Instale tudo com:
+
+```bash
+sudo apt update
+sudo apt install nasm gcc gcc-multilib make -y
+```
+
+### **nasm**
+
+Montador utilizado para compilar os arquivos `.asm` no formato `elf32`.
+
+### **gcc + gcc-multilib**
+
+O código em C é compilado com `-m32`, então é obrigatório ter suporte a 32 bits.
+Sem o `gcc-multilib`, surgem erros como:
+
+* `crt1.o: No such file`
+* `file in wrong format`
+* incompatibilidade de bibliotecas 32 bits.
+
+### **make**
+
+Responsável por executar o `Makefile` que organiza toda a compilação do projeto.
+
 
 ## 1. Tarefas selecionadas
 
@@ -315,4 +341,5 @@ make clean
 ```
 
 Com isso, o README fica alinhado ao `Makefile` e às três atividades (2, 4 e 7) que você mencionou.
+
 
