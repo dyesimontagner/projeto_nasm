@@ -1,7 +1,4 @@
-# =================================================================
-# MAKEFILE MASTER - PROJETO NASM
-# Gerencia: Macros, Integração C+ASM, Filtro de Arquivos e Verificações
-# =================================================================
+
 
 # --- Ferramentas ---
 NASM      = nasm
