@@ -46,6 +46,9 @@
 %%skip:
 %endmacro
 
+; ATENÇÃO: estas macros usam int 0x21 (DOS), não vão rodar em Linux,
+; mas servem para mostrar a EXPANSÃO das macros, que é o objetivo do exercício.
+
 %macro writefile 2+
     jmp %%endstr
 %%str: db %2
@@ -82,6 +85,7 @@
     db %2
 %endmacro
 
+; retcc exatamente como nos slides: usa o CC invertido (%-1)
 %macro retcc 1
     j%-1 %%skip
     ret
@@ -110,31 +114,45 @@ section .text
 global main
 
 main:
+    ; exemplo de prólogo completo com salvamento de registradores
     prologo
 
     mov eax, 20
 
+    ; exemplo de chamada de função com frame na pilha
     call func_exemplo_frame
 
+    ; exemplos de multipush / multipop
     mov ebx, 1
     mov ecx, 2
     mov edx, 3
     multipush eax, ebx, ecx, edx
     multipop  eax, ebx, ecx, edx
 
+    ; exemplo de retz: retorna se eax != 20
     cmp eax, 20
     je .ok
     retz
 .ok:
 
+    ; exemplo de retcc: "retorna se zero"
     mov eax, 0
     cmp eax, 0
     retcc z
 
+    ; --------------- Exemplos de writefile e die ---------------
+    ; writefile: igual ao slide (handle 2, string, 13,10)
+    writefile 2, "Exemplo da macro writefile", 13, 10
+
+    ; die: chamada com UM parâmetro, como definido (0-1)
+    die "Erro fatal via macro die"
+
+    ; (na prática, depois de die o programa terminaria)
     epilogo
 
 
 func_exemplo_frame:
+    ; exemplo de prologue_frame + epilogue
     prologue_frame 16
     mov dword [ebp-4], 1234
     epilogue
